@@ -146,7 +146,7 @@ def spectre_unforming(spectre):
     n = len(spectre) - 1
     fft = [0] * n
     fft[0] = complex((spectre[0] + spectre[-1]) / 2, (spectre[0] - spectre[-1]) / 2)
-    cache_ind = int(math.log2(len(spectre) * 2) + 0.5)
+    cache_ind = int(math.log2((len(spectre) - 1) * 2) + 0.5)
     ifft_level = IFFT_CACHE[cache_ind]
     for k in range(1, n):
         omega = ifft_level[k]
