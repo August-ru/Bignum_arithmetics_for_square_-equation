@@ -24,7 +24,11 @@ def initial_approximation(number):
     new_exp = _calc_reciprocal_sqrt_exponent(number, approx, high_block, low_block)
     approx.set_exp(new_exp)
     approx.set_sign(1)
-    if (number.get_exp() + BASE * len(number.get_mantissa())) % 2 == 1:
+    if low_block != 0:
+        needs_root10 = (number.get_exp() + BASE * len(mantissa)) % 2 != 0
+    else:
+        needs_root10 = number.get_exp() % 2 != 0
+    if needs_root10:
         approx = mul(approx, ROOT_OF_10)
     return approx
 
@@ -48,6 +52,8 @@ def _calc_reciprocal_sqrt_exponent(number, approx, high_block, low_block):
             base_exp -= 1
     else:
         base_exp = approx.get_exp() - number.get_exp() // 2
+        if number.get_exp() % 2 != 0:
+            base_exp -= 1
     return base_exp
 
 
@@ -60,9 +66,3 @@ def newton_algorithm(number, approx, precision=11):
         yn = short_mul(sub(constant_for_newton, yn), 5, -1)
         approx = mul(approx, yn, accuracy + 10)
     return approx
-
-
-if __name__ == '__main__':
-    a = str_to_BF('0.03')
-    a = sq_root(a)
-    print(BF_to_str(a))
