@@ -24,7 +24,7 @@ def initial_approximation(number):
     new_exp = _calc_reciprocal_sqrt_exponent(number, approx, high_block, low_block)
     approx.set_exp(new_exp)
     approx.set_sign(1)
-    if number.get_exp() % 2 == 1:
+    if (number.get_exp() + BASE * len(number.get_mantissa())) % 2 == 1:
         approx = mul(approx, ROOT_OF_10)
     return approx
 
