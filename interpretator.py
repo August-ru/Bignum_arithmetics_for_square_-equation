@@ -1,4 +1,4 @@
-from core import Big_float, BASE
+from core import Big_float, BASE, normalized
 from abc import ABC, abstractmethod
 
 
@@ -21,17 +21,17 @@ class Context():
     def set_a(self,
               Bigfloat_number: Big_float) -> None:
         
-        self.a = Bigfloat_number
+        self.a = normalized(Bigfloat_number)
 
     def set_b(self,
               Bigfloat_number: Big_float) -> None:
         
-        self.b = Bigfloat_number
+        self.b = normalized(Bigfloat_number)
 
     def set_c(self,
               Bigfloat_number: Big_float) -> None:
         
-        self.c = Bigfloat_number
+        self.c = normalized(Bigfloat_number)
         
 
 
